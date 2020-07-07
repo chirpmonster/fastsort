@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    function fastsort(arr) {
+        let start = 0;
+        let end = arr.length - 1;
+        let middle = Math.floor((start + end) / 2);
+        let leftArr = [];
+        let rightArr = [];
+        for (let i = start; i <= end; i++) {
+            if (i === middle) {
+                continue;
+            }
+            if (arr[i] < arr[middle]) {
+                leftArr.push(arr[i])
+            } else {
+                rightArr.push(arr[i])
+            }
+        }
+        if (rightArr.length > 1) {
+            rightArr=fastsort(rightArr);
+        }
+        if (leftArr.length> 1) {
+            leftArr=fastsort(leftArr)
+        }
+        return leftArr.concat(arr[middle],rightArr)
+    }
+    let arr = [];
+    for(let i=0;i<=1000;i++)
+        arr.push(Math.floor(Math.random()*1000));
+    arr=fastsort(arr);
+    console.log(arr)
+</script>
+</html>
